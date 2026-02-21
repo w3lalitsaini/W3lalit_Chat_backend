@@ -46,9 +46,18 @@ app.use("/api/messages", messageRoutes);
 app.use("/api/conversations", conversationRoutes);
 
 // Health check endpoint
-
 app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// Root endpoint
+app.get("/", (req, res) => {
+  res.json({ message: "ChatSphere API is running", version: "1.0.0" });
+});
+
+// 404 Handler for unknown routes
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
 });
 
 // MongoDB Connection

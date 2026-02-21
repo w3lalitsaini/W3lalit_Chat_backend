@@ -45,18 +45,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/conversations", conversationRoutes);
 
-// Serve static files in production
-if (process.env.NODE_ENV === "production") {
-  // Serve frontend static files
-  app.use(express.static(path.join(__dirname, "../../dist")));
-
-  // Handle React routing
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../dist/index.html"));
-  });
-}
-
 // Health check endpoint
+
 app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
